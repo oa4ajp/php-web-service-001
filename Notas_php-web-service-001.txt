@@ -1,0 +1,323 @@
+Upload to gihub
+
+Repository:
+***********
+Create repositorory on git hub
+
+cd angular5-php-service
+git init
+
+Staging:
+********
+git add .
+create .gitignore
+git add .gitignore 
+git commit -m "First Commit"
+git branch
+
+git remote add origin https://github.com/oa4ajp/angular5-php-service.git
+git remote -v
+
+git push -u origin master
+
+
+correct rewrite rules Locahost:
+*******************************
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+  RewriteRule ^(.*) - [E=BASE:%1]
+  
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+correct rewrite rules Prod:
+***************************
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+  RewriteRule ^(.*) - [E=BASE:%1]
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^ /public/index.php [QSA,L]
+</IfModule>
+
+
+DataBase Mysql:
+***************
+web-service-001
+
+DataBase Collation: utf8_unicode_ci
+
+Database user:
+**************
+username: root
+pass: [empty]
+
+
+373
+down vote
+accepted
+Ctrl + Shift + N will open a new window. 
+You can then use File > Open Folder to have two instances of Visual Studio Code with different folders in each window.
+
+Test database calls:
+********************
+http://localhost:8080/web-service-001/public/tasks
+http://localhost:8080/web-service-001/public/task (Post)
+Body: x-www-form-urlencoded: key=task , value=TestTask001
+
+Host Credentials:
+*****************
+user: oa4ajp@gmail.com
+pass: dniiNi
+
+Database Name: 1772083_webservice001
+username: 1772083_webservice001
+pass: dniiNi
+Database Host: fdb13.biz.nf
+
+
+
+Los endpoints funcionan correctamente en el servidor de Hostin
+El cors de los endpoints también funciona correctamente con llamadas desde Angular.
+
+
+comentar el innsert del post para ver si esa es la causante de la demora.
+Lo que está demorando es la lógica del insert, si comento el insert demora 260 ms en vez de 500ms.
+el mayor tiempo de demora está desde el executa para abajo.
+
+Ya se sigualó el teimpod epost y get inset, select, es variable, dejando el cófigo del post como estaba sin comentar nada 
+el tiempo del post y get es casi el mismo.
+
+Cambié la versión del php del host a 7.2 y funcionó bien.
+el php 7 es más rápidp que el php 5.
+
+Ok, el prototipo funcinó exitosamente con el cliente angular 5.
+
+Apply JWT !!!
+
+Add additional dependencies with composer:
+******************************************
+composer require tuupola/slim-jwt-auth
+it installs also firebase/php-jwt
+
+Send the Tonjen on the Header:
+******************************
+header => 
+	key: Authorization 
+	value: Bearer <token>
+	
+
+el método fetchToken está funcionaqndo correctamente y está recuperando el token que está luedo del espacio de
+de bearer.
+
+Token Generator:
+https://www.jsonwebtoken.io/
+
+Hacer una herramienta parecia con windows por ejemplo
+
+secret: supersecretkeyyoushouldnotcommittogithub
+
+
+"algorithm" => ["HS256", "HS512", "HS384"],
+
+http://jwtbuilder.jamiekurtz.com/
+
+https://jwt.io/
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+
+Payload:
+********
+{
+  "name": "Alfredo Mendiola"
+}
+
+
+secret: supersecretkeyyoushouldnotcommittogithub
+
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWxmcmVkbyBNZW5kaW9sYSJ9.2GlE4uEI0DxCFR7jXW3OzgjA1sFUQGCfx4yagyhO3Xs
+
+POST => http://localhost:8080/web-service-001/public/task 
+Body:
+*****
+
+key: task
+value: TestTask070
+
+Hacer deploy en prodo y probar el token usando cors.
+
+aplicar tokens sólo para las llamadas post/get/delete
+Angular deployed on biz.nf:
+***************************
+http://angular5.co.nf
+
+cd web service project
+add jwt
+var_dump( 'hola');
+
+el método fetchToken está funcionaqndo correctamente y está recuperando el token que está luedo del espacio de
+de bearer.
+
+biz nf: 
+*******
+email: oa4ajp@gmail.com / dni
+
+Ftp:
+****
+username: 1772083_oa4ajp
+ftp pass: dniiNi
+Hostnames: amendiola.co.nf, f13-preview.biz.nf
+Port: 21
+
+Production http access on public folder:
+****************************************
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Some hosts may require you to use the `RewriteBase` directive.
+  # Determine the RewriteBase automatically and set it as environment variable.
+  # If you are using Apache aliases to do mass virtual hosting or installed the
+  # project in a subdirectory, the base path will be prepended to allow proper
+  # resolution of the index.php file and to redirect to the correct URI. It will
+  # work in environments without path prefix as well, providing a safe, one-size
+  # fits all solution. But as you do not need it in this case, you can comment
+  # the following 2 lines to eliminate the overhead.
+  RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+  RewriteRule ^(.*) - [E=BASE:%1]
+  
+  # If the above doesn't work you might need to set the `RewriteBase` directive manually, it should be the
+  # absolute physical path to the directory that contains this htaccess file.
+  #RewriteBase /
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule .* - [env=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+  RewriteRule ^ /public/index.php [QSA,L]
+</IfModule>
+
+
+Producction htaccess:
+*********************
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Some hosts may require you to use the `RewriteBase` directive.
+  # Determine the RewriteBase automatically and set it as environment variable.
+  # If you are using Apache aliases to do mass virtual hosting or installed the
+  # project in a subdirectory, the base path will be prepended to allow proper
+  # resolution of the index.php file and to redirect to the correct URI. It will
+  # work in environments without path prefix as well, providing a safe, one-size
+  # fits all solution. But as you do not need it in this case, you can comment
+  # the following 2 lines to eliminate the overhead.
+  RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+  RewriteRule ^(.*) - [E=BASE:%1]
+  
+  # If the above doesn't work you might need to set the `RewriteBase` directive manually, it should be the
+  # absolute physical path to the directory that contains this htaccess file.
+  #RewriteBase /
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^ /public/index.php [QSA,L]
+  RewriteRule .* - [env=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+</IfModule>
+
+Endpoints:
+**********
+http://amendiola.co.nf/public/tasks
+http://amendiola.co.nf/public/task
+
+Insecure use of middleware over HTTP denied by configuration
+
+upload to github
+-generate token on the angular application with the secret value using an jwt library
+jwt.io ?
+
+
+
+GeneratedToke from Angular vs firebase jwt token php:
+*****************************************************
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiQWxmcmVkbyBNZW5kaW9sYSJ9.ZPnqFx0-wGZTZPzUZTlVCmAJ5VObPNpgdKxF21npfMo
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiQWxmcmVkbyBNZW5kaW9sYSJ9.NW7vVmu2OErfkeEIg0yg7dgfFCruM3BJSyWgH4x11Q8
+
+La diferencia está entre el ultimo segmaneto de cada token, los segmentos están separados por puntos.
+
+
+El jwtio está generando el token diferente por el orden de los atributos typ and alg.
+
+
+https://www.jsonwebtoken.io/
+
+Para el signature se require que hayan campos adicionales en el payload!!!, no usar signature.
+Usar los token normales por el momento.
+
+Create Token with https://www.jsonwebtoken.io/:
+************************************************
+{
+ "typ": "JWT",
+ "alg": "HS256"
+}
+{"name": "Alfredo Mendiola"}
+
+key: 4037227320180606
+
+Token Generado:
+***************
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiQWxmcmVkbyBNZW5kaW9sYSIsImp0aSI6IjgwNzkzM2U2LTllOTctNGE2ZS04ODlhLTYyNTRjNzg2MDlhNiIsImlhdCI6MTUyODI5NjU4MCwiZXhwIjoxNTI4MzAwMTgwfQ.oMo0pwCm2Ix46cgqQN0GmRN-5DS1m_nfFtr2aojqLBA
+Este token es lo mas parecido al generado por el jwt de angular
+
+Buscar otras libraries de js para crea jwt token
+
+http://127.0.0.1:8080/web-service-001/public/tasks
+
+
+http://127.0.0.1:8080/jwt/test.php
+https://github.com/auth0/php-jwt-example
+delete vendor folder and run composer install
+
+Generated Token with dfirebase jwt token php:
+**********************************************
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiQWxmcmVkbyBNZW5kaW9sYSJ9.NW7vVmu2OErfkeEIg0yg7dgfFCruM3BJSyWgH4x11Q8
+
+Al parecer lo que hay que guardar en el cliente spa es el token, es decir no es neceario generarlo, sino tenerlo
+guardado, como se hace con el login y se guarda el token en el cliente mientras el usuario se mantenga logueado.
+
+hat's the point of generating a JWT at client-side? If you do it at client side, your private key is public. So anywone can counterfeit your token. – JB Nizet Mar 11 at 8:50 
+Please migrate this to server side. Most probably inside authentication method (if any) . – Supun Dharmarathne
+
+No crear los tokens in server side para no exponer la public key.
+
+Guardar el token encriptado, desencriptarlo y enviarlo en cada post.
+No guardar el secret key en el cliente, es muy riesgoso.
+
+Lo que tienes que hacer es que el token contenga en elmpayload el user y password
+y validar eso contra una base de datos, pero igual si interceptan el token, podrán logurearse con esa info.
+
+el manejo de token se debe manejar con sistemas donde el usuario esté logueado, es decir
+mientras el usuario no esté logueado, no tendrá manera de accedera a la aplicación e interceptar el
+tráfico de los endpoints.
+
+Web Site:
+*********
+http://angular5.co.nf
+
+File Upload:
+************
+POST http://localhost:8080/php-web-service-001/public/file
+Body: form-data checked
+Select file (Text/File combo)
+Pinguins.jpg
+key: file name to recieve an array on the php service, don't leave key name empty on the file row on postman.
+
+Add Security Permission to the upload folder, allw all to all users.
+
+Deploy application to the server to test the file upload.
+
+
+
