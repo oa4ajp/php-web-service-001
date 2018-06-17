@@ -73,7 +73,7 @@ Body: x-www-form-urlencoded: key=task , value=TestTask001
 Host Credentials:
 *****************
 user: oa4ajp@gmail.com
-pass: dniiNi
+pass: dni
 
 Database Name: 1772083_webservice001
 username: 1772083_webservice001
@@ -315,9 +315,9 @@ Select file (Text/File combo)
 Pinguins.jpg
 key: file name to recieve an array on the php service, don't leave key name empty on the file row on postman.
 
-Add Security Permission to the upload folder, allw all to all users.
+Add Security Permission to the upload folder, allOw all to all users.
 
-Deploy application to the server to test the file upload.
+Deploy application to the server to test the file upload. (--OK--)
 
-
-
+amendiola.co.nf/public/tasks
+POST http://amendiola.co.nf/public/file
